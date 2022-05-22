@@ -65,12 +65,44 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void InstantKillP1()
+    {
+        P1_life -= 5;
+        for (int i = 0; i < p1Stick.Length; i++)
+        {
+            if (P1_life > i)
+            {
+                p1Stick[i].SetActive(true);
+            }
+            else
+            {
+                p1Stick[i].SetActive(false);
+            }
+        }
+    }
+
     public void HurtP2()
     {
         P2_life -= 1;
         for(int i = 0; i < p2Stick.Length; i++)
         {
             if(P2_life > i)
+            {
+                p2Stick[i].SetActive(true);
+            }
+            else
+            {
+                p2Stick[i].SetActive(false);
+            }
+        }
+    }
+
+    public void InstantKillP2()
+    {
+        P2_life -= 5;
+        for (int i = 0; i < p2Stick.Length; i++)
+        {
+            if (P2_life > i)
             {
                 p2Stick[i].SetActive(true);
             }

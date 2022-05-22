@@ -136,5 +136,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f9e68b100e097a4ba0dfd04bce90b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballSpeed: 15
+  ballSpeed: 10
   SnowballEffect: {fileID: 7754046185937251290, guid: c7e86f0e33c9f6b46bfcf7831439480b, type: 3}

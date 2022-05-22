@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D theRB;
 
+    public float fireRate = 0.5F;
+    private float nextFire = 0.0F;
+
     public GameObject snowBall;
     public Transform throwPoint;
 
@@ -50,8 +53,9 @@ public class PlayerController : MonoBehaviour
             theRB.velocity = new Vector2(0, theRB.velocity.y);
         }
 
-        if (Input.GetKeyDown(throwBall))
+        if (Input.GetKeyDown(throwBall) && Time.time > nextFire)
         {
+            nextFire = Time.time + fireRate;
             GameObject ballClone = (GameObject)Instantiate(snowBall, throwPoint.position, throwPoint.rotation);
             ballClone.transform.localScale = transform.localScale;
             anim.SetTrigger("Throw");
