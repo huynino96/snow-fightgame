@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] p1Stick;
     public GameObject[] p2Stick;
 
+    public float speed = 100;
     public string mainMenu;
     // Start is called before the first frame update
     void Start()

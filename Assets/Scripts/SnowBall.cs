@@ -29,15 +29,14 @@ public class SnowBall : MonoBehaviour
         if (collision.tag == "Player1")
         {
             FindObjectOfType<GameManager>().HurtP1();
-            Vector3 direction = (transform.position - collision.transform.position).normalized;
-            collision.GetComponent<Rigidbody2D>().AddForce(direction * speed);
+           
         }
 
         if(collision.tag == "Player2")
         {
             FindObjectOfType<GameManager>().HurtP2();
-            Vector3 direction = (transform.position - collision.transform.position).normalized;
-            collision.GetComponent<Rigidbody2D>().AddForce(direction * speed);
+            //Vector3 direction = (transform.position - collision.transform.position).normalized;
+            //collision.GetComponent<Rigidbody2D>().AddForce(direction * speed);
         }
         Instantiate(SnowballEffect, transform.position, transform.rotation);
         Destroy(gameObject);
