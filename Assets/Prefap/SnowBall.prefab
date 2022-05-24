@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7554533120440608795}
   m_Layer: 0
   m_Name: SnowBall
-  m_TagString: Untagged
+  m_TagString: snowball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,3 +138,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballSpeed: 10
   SnowballEffect: {fileID: 7754046185937251290, guid: c7e86f0e33c9f6b46bfcf7831439480b, type: 3}
+  knockbackDelay: 0.1
+  forceAmount: 20
+  knockedBack: 1

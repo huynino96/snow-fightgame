@@ -9,13 +9,20 @@ public class SnowBall : MonoBehaviour
 
     public GameObject SnowballEffect;
 
-    public float speed = 100;
+    private PlayerController player1;
+    private PlayerController player2;
 
     private Rigidbody2D theRB;
     // Start is called before the first frame update
     void Start()
     {
         theRB = GetComponent<Rigidbody2D>();
+        PlayerController playerController1 = GameObject.FindGameObjectWithTag("Player1").GetComponent<PlayerController>();
+        player1 = playerController1;
+
+        PlayerController playerController2 = GameObject.FindGameObjectWithTag("Player2").GetComponent<PlayerController>();
+        player2 = playerController2;
+
     }
 
     // Update is called once per frame
@@ -29,16 +36,18 @@ public class SnowBall : MonoBehaviour
         if (collision.tag == "Player1")
         {
             FindObjectOfType<GameManager>().HurtP1();
-           
+            StartCoroutine(player1.Knockback(0.02f, 350, player1.transform.position));
+
         }
 
         if(collision.tag == "Player2")
         {
             FindObjectOfType<GameManager>().HurtP2();
-            //Vector3 direction = (transform.position - collision.transform.position).normalized;
-            //collision.GetComponent<Rigidbody2D>().AddForce(direction * speed);
+            StartCoroutine(player2.Knockback(0.02f, 350, player2.transform.position));
+
         }
         Instantiate(SnowballEffect, transform.position, transform.rotation);
         Destroy(gameObject);
     }
+
 }

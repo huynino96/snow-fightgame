@@ -13,12 +13,15 @@ public class GameManager : MonoBehaviour
 
     public GameObject p1Wins;
     public GameObject p2Wins;
+    public GameObject Draw;
 
     public GameObject[] p1Stick;
     public GameObject[] p2Stick;
 
     public float speed = 100;
     public string mainMenu;
+
+    private bool isBothDie;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,17 +31,53 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(P1_life <= 0)
+        if (P1_life <= 0 && P2_life <= 0)
         {
+            isBothDie = true;
+            Draw.SetActive(true);
             player1.SetActive(false);
-            p2Wins.SetActive(true);
+            player2.SetActive(false);
+            p2Wins.SetActive(false);
+            p1Wins.SetActive(false);
+            
+        }
+
+        if (P1_life <= 0)
+        {
+            if (isBothDie)
+            {
+                player1.SetActive(false);
+                player2.SetActive(false);
+                p2Wins.SetActive(false);
+                p1Wins.SetActive(false);
+                isBothDie = false;
+            }
+            else
+            {
+                player1.SetActive(false);
+                p2Wins.SetActive(true);
+            }
+            
         }
 
         if (P2_life <= 0)
         {
-            player2.SetActive(false);
-            p1Wins.SetActive(true);
+            if (isBothDie)
+            {
+                player1.SetActive(false);
+                player2.SetActive(false);
+                p2Wins.SetActive(false);
+                p1Wins.SetActive(false);
+                isBothDie = false;
+            }
+            else
+            {
+                player2.SetActive(false);
+                p1Wins.SetActive(true);
+            }
+            
         }
+
 
         if(Input.GetKeyDown(KeyCode.R))
         {
@@ -52,7 +91,7 @@ public class GameManager : MonoBehaviour
 
     public void HurtP1()
     {
-        P1_life -= 1;
+        //P1_life -= 1;
         for(int i = 0; i < p1Stick.Length; i++)
         {
             if(P1_life > i)
@@ -84,7 +123,7 @@ public class GameManager : MonoBehaviour
 
     public void HurtP2()
     {
-        P2_life -= 1;
+        //P2_life -= 1;
         for(int i = 0; i < p2Stick.Length; i++)
         {
             if(P2_life > i)

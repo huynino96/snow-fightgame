@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     public float jumpForce;
 
+    public bool faceLeft;
+    public bool faceRight;
+
     public KeyCode left;
     public KeyCode right;
     public KeyCode jump;
@@ -25,7 +28,6 @@ public class PlayerController : MonoBehaviour
 
     public GameObject snowBall;
     public Transform throwPoint;
-
     private Animator anim;
     // Start is called before the first frame update
     void Start()
@@ -43,10 +45,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(left))
         {
             theRB.velocity = new Vector2(-moveSpeed, theRB.velocity.y);
+            faceLeft = true;
+            faceRight = false;
         }
         else if (Input.GetKey(right))
         {
             theRB.velocity = new Vector2(moveSpeed, theRB.velocity.y);
+            faceLeft = false;
+            faceRight = true;
         }
         else
         {
@@ -77,5 +83,40 @@ public class PlayerController : MonoBehaviour
 
         anim.SetFloat("Speed", Mathf.Abs(theRB.velocity.x));
         anim.SetBool("Grounded", isGrounded);
+    }
+
+    public IEnumerator Knockback(float knockDur, float knockPwr, Vector3 knockDir)
+    {
+        float timer = 0;
+        Debug.Log("Timer: " + timer + "Knock Dur: " + knockDur);
+
+        while (knockDur > timer)
+        {
+            if(transform.position.x < 1 && transform.position.x > -1)
+            {
+                Debug.Log("run this close script");
+                timer += Time.deltaTime;
+                if(transform.position.x > -1 && transform.position.x <= 0)
+                {
+                    Debug.Log("Face Left: " + faceLeft);
+                    theRB.AddForce(new Vector3((knockDir.x + -5) * 1000, knockDir.y * knockPwr, transform.position.z));
+                }
+                else if (transform.position.x < 1 && transform.position.x >= 0)
+                {
+                    Debug.Log("Face Right" + faceRight);
+                    theRB.AddForce(new Vector3((knockDir.x + 5) * 1000, knockDir.y * knockPwr, transform.position.z));
+                }
+                
+            }
+            else
+            {
+                Debug.Log("run this far script");
+                timer += Time.deltaTime;
+                theRB.AddForce(new Vector3(knockDir.x * 1000, knockDir.y * knockPwr, transform.position.z));
+            }
+            
+                
+        }
+        yield return 0;
     }
 }
